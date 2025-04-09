@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings Menu</title>
+    <style>
+        /* Position the settings button in the top left */
+        .settings-button {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* Styling for the modal (centered settings menu) */
+        .settings-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #b06fe8; /* Updated box color */
+            color: white; /* Text color for readability */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 300px;
+            text-align: center;
+        }
+
+        /* Overlay to detect clicks outside */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
+        /* Volume & Font slider styling */
+        .volume-container, .font-container {
+            margin: 15px 0;
+        }
+
+        /* Custom Black Slider (Chrome Only) */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            background: black; /* Change track color to black */
+            border-radius: 3px;
+            outline: none;
+        }
+
+        /* Style the slider thumb (circle) */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: black; /* Change thumb color to black */
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Button group container */
+        .button-group {
+            margin: 15px 0;
+        }
+
+        /* Pause & Continue Button (emoji only) */
+        .button-group button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Close button styling */
+        .close-button {
+            background: gray;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Main page content (affected by font size) */
+        .content {
+            font-size: 16px; /* Default font size */
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Settings button (⚙️ emoji) -->
+    <button class="settings-button" onclick="toggleSettings()">⚙️</button>
+
+    <!-- Overlay to close menu when clicking outside -->
+    <div class="overlay" onclick="closeSettings()"></div>
+
+    <!-- Settings modal -->
+    <div class="settings-modal">
+        <h3>Settings</h3>
+
+        <!-- Volume Control -->
+        <div class="volume-container">
+            <label for="volume-slider">Volume: <span id="volume-value">50</span>%</label>
+            <input type="range" id="volume-slider" min="0" max="100" value="50" oninput="updateVolume(this.value)">
+        </div>
+
+        <!-- Font Size Control (Now a slider!) -->
+        <div class="font-container">
+            <label for="font-slider">Font Size: <span id="font-size-value">16</span>px</label>
+            <input type="range" id="font-slider" min="10" max="40" value="16" oninput="updateFontSize(this.value)">
+        </div>
+
+        <!-- Pause & Continue Button -->
+        <div class="button-group">
+            <button id="pause-button" onclick="togglePause()">⏸️</button>
+        </div>
+
+        <button class="close-button" onclick="closeSettings()">Close</button>
+    </div>
+
+    <!-- Main content to test font size changes -->
+    <div class="content" id="main-content" onload="alert('test');" >
+     <!--   <p>This is some sample text. Try adjusting the font size!</p> -->
+    </div>
+
+</body>
+</html>
